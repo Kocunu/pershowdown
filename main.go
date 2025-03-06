@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"server/main/server"
 	"strconv"
+	"strings"
 )
 
 var Personas = []server.Persona{
@@ -15,8 +17,10 @@ var Personas = []server.Persona{
 
 func main() {
 	r := gin.Default()
+	r.Use(cors.Default())
 	r.GET("/test", testing)
 	r.GET("/persona/id/:id", getPersonaByID)
+	r.GET("/persona/name/:name", getPersonaByName)
 
 	fmt.Println("Server is Runngin")
 
@@ -42,4 +46,16 @@ func getPersonaByID(c *gin.Context) {
 		}
 	}
 	c.JSON(http.StatusNotFound, gin.H{"message": "persona not found"})
+}
+
+func getPersonaByName(c *gin.Context) {
+	nameParam := c.Param("name")
+	name := string(nameParam)
+	for _, n := range Personas {
+		if strings.ToLower(n.Name) == strings.ToLower(name) {
+			c.JSON(http.StatusOK, n)
+			return
+		}
+		return
+	}
 }

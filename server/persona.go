@@ -7,6 +7,7 @@ type Persona struct {
 	Status      Status
 	BattleStats BattleStats
 	Weakness    Weakness
+	Image       string
 }
 
 type Status struct {
@@ -49,6 +50,7 @@ var TestPersona1 = Persona{
 	ID:    1,
 	Name:  "Ares",
 	Level: 25,
+	Image: "https://static.wikia.nocookie.net/megamitensei/images/3/30/SMT_II_Nyx.png",
 	Status: Status{
 		Health: 300,
 		Magic:  150,
@@ -78,6 +80,7 @@ var TestPersona2 = Persona{
 	ID:    2,
 	Name:  "Nyx",
 	Level: 30,
+	Image: "https://static.wikia.nocookie.net/megamitensei/images/3/30/SMT_II_Nyx.png",
 	Status: Status{
 		Health: 350,
 		Magic:  200,
